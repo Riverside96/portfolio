@@ -1,4 +1,5 @@
 \documentclass[a4paper]{article}
+\usepackage{graphicx} 
 \usepackage{amsmath}
 \usepackage{appendix}
 \usepackage{amssymb}
@@ -10,37 +11,33 @@
 \usepackage{textcomp}
 \usepackage{pgfplots}
 \pgfplotsset{width=10cm,compat=1.9}
+\begin{titlepage}
+    \centering
+    \includegraphics[width=4cm]{uni_logo.svg.png}
+    {\bfseries\Large
+
+    \vspace{2cm}
+        Algorithms and Data Structures\\
+        Department of Computing\\
+        55-508226-AF-20223\\
+        \vskip2cm
+        Rory Boyes: c1054267\\
+    }    
+    \vfill
+    \vfill
+    \vfill
+\end{titlepage}
 
 
+\title{Algorithms And Data Structures\\55-508226-AF-20223}
+\author{Rory Boyes\\student id: c1054267\\Department of Computing}
 
 
-
-
-\title{Algorithms And Data Structures}
-\author{Rory Boyes}
 \begin{document}
-\maketitle
-
-
-
-
-
-
-
-
 
 \titlepage
 \tableofcontents
-% \begin{abstract}
-%   This is my cool abstract using latex for the first time,
-%   I will begin to make make my first document. 
-%   Though it will take a good deal of time to learn the basics,
-%   I am sure it will pay off in the long run. This is a short abstract
-%   and should be included after the contents page for formality  to give a
-%   brief overview of the contents of the document
-% \end{abstract}
 \newpage
-
 
 
 %========================================================================================%
@@ -176,7 +173,7 @@ The size of the stack grows linearly with the number of elements in the input st
 
 If space complexity was our primary concern, this approach would acceptable.
 Utilizing a hashed set for checking our valid plate sizes will prevent us from traversing during this operation, 
-but despite this, our function is still $O(n^2)$, as the fastest growing term takes precedant. \pagebreak
+but despite this, our function is still $O(n^2)$, as the fastest growing term takes precedent. \pagebreak
 
 
 
@@ -225,25 +222,25 @@ but despite this, our function is still $O(n^2)$, as the fastest growing term ta
 The time complexity of the algorithm above is $O(n)$,
 where $n$ is the number of elements in the input stack. 
 This is because the algorithm performs a single pass over the elements of the stack,
-counting the number of occurrences of each element inside of the hashmap. 
+counting the number of occurrences of each element inside of the Hash-Map. 
 The time complexity of this operation is $O(n)$, 
 as the hash map has an average-case time complexity of $O(1)$ for insertion and retrieval of elements
 due to usage of a hashing function.
-$\therefore$ the $T(n)$ grows linearlly with the size of the input. \\
+$\therefore$ the $T(n)$ grows linearly with the size of the input. \\
 
 It is worth noting that if we were to use another data type such as a string to represent each plate type,
-a linked list value store impentation of a hash map could decay to $O(n^2)$ in the worst case, due to collisions.
+a linked list value store implementation of a hash map could decay to $O(n^2)$ in the worst case, due to collisions.
 As we are using integers we may also state that  $T(n) \in \theta (n)$ \\
 
 The space complexity of the function is also $O(n)$,
-as the hashmap used to store the counts of each element of the unsorted stack
+as the hash-map used to store the counts of each element of the unsorted stack
 grows linearly with the number of elements in the input stack,
-ie, there is no possibility that the number of elements within the hashmap could ever exceed that of the input stack.
+i.e, there is no possibility that the number of elements within the hash-map could ever exceed that of the input stack.
 $\therefore$ the space complexity is $O(n)$. \\
 
-Furthermore, had we not been working under the constaint of only moving one element at any given time,
+Furthermore, had we not been working under the constant of only moving one element at any given time,
 the time complexity of the algorithm could be improved further
-to $O(n log n)$ by sorting the elements in the hashmap before pushing them back onto the stack.
+to $O(n log n)$ by sorting the elements in the hash-map before pushing them back onto the stack.
 However, this would be at the detriment of additional space complexity,
 as the usage of a sorting algorithm, such as quick or merge sort, 
 would require additional space to store auxiliary structures such as partition indices. \\ 
@@ -291,20 +288,20 @@ The default size is small enough to minimize memory overhead,
 while large enough to prevent resizing too often.
 The initial capacity can also be specified within the constructor, 
 by passing the capacity as an argument. 
-This could be useful in cases where it is known in advance that the hashmap will need 
+This could be useful in cases where it is known in advance that the hash-map will need 
 to store a large data set, though a larger initial capacity will require more memory. \\
 
 
-The load factor of a HashMap is the ratio of the number of entries in the hash map to the capacity of the hash map,
+The load factor of a hash-map is the ratio of the number of entries in the hash map to the capacity of the hash map,
 and is calculated by dividing the number of entries in the map by the capacity of the map
 It is used to determine when the capacity of the hash map should be increased to maintain good performance.
-The default maxiumum load factor is defined to allow for the aforementioned resizing once it has been exceeded.
-A load factor too high could cause the hashmap to perform poorly as collisions may occur causing our time complexity to decay. 
+The default maximum load factor is defined to allow for the aforementioned resizing once it has been exceeded.
+A load factor too high could cause the map to perform poorly as collisions may occur causing our time complexity to decay. 
 Contrarily, too low of a load factor is inefficient in regards to space complexity as the resizing will occur prematurely,
 resulting in unnecessarily memory allocation. \\
 
-0.75 is a fairly typical load factor for hashmap implementations as it provides a middleground between
-these trade offs. The load factor can also be specified by passing a second argument to the constructor upon initializtion. \pagebreak
+0.75 is a fairly typical load factor for hash-map implementations as it provides a middle ground between
+these trade offs. The load factor can also be specified by passing a second argument to the constructor upon initialization. \pagebreak
 
 
 
@@ -346,9 +343,9 @@ The constructor takes all three of these fields as arguments. \\
 
 The key of each entry is passed through a hash function to determine which bucket it is to be stored in.
 If the bucket is empty, the new entry becomes the first entry in the bucket.
-If a collision occurs, the new entry is added to the end of the list within the corresponsing bucket.
+If a collision occurs, the new entry is added to the end of the list within the corresponding bucket.
 Subsequently the hash function can again be used to determine which bucket to search 
-to retrive the desired key value pair based on the hash of the key.
+to retrieve the desired key value pair based on the hash of the key.
 
 
 
@@ -589,8 +586,8 @@ or update the value of an existing pair. \\
 First, the hash code of the key argument is determined via the hash function,
 which will be later detailed.
 An int, index is assigned with the value of the argument hash
-corresponsing to the index of the bucket where the entry should be stored.
-The first Entry at the specified index of the the bucket array is then retrived. \\
+corresponding to the index of the bucket where the entry should be stored.
+The first Entry at the specified index of the bucket array is then retrieved. \\
 
 This is then used to iterate through the list of entries to check whether another entry with the same key as the argument key is present.
 If it is the case that another entry is present with the same key,
@@ -600,8 +597,8 @@ Otherwise, this iteration continues until null is reached, signifying the end of
 If an entry with the same key is not found, a new Entry is created with the given arguments. 
 which is then added to the beginning of the linked list of entries for the bucket. \\
 
-The size field of the hashmap is then incremented, 
-and a check is then operformed to determine if the resize function is to be called.
+The size field of the hash map is then incremented, 
+and a check is then performed to determine if the resize function is to be called.
 As mentioned previously, this is determined by the load factor, 
 which must be exceeded before the resize function is called
 which will increase the capacity of the map and redistribute the entries 
@@ -649,8 +646,8 @@ It is used by many other methods of the HashMap class to access the values store
 The get method first calculates the hash code of the key argument,
 which is subsequently used to determine the index of the bucket where the entry with the matching key is stored. \\
 
-A while loop is used to iterate thorugh the linked list of Entry's for the given bucket to find the entry with the matching key. 
-Again, a null check is used, simirlary to the put method, to signifity the end of the list. \\
+A while loop is used to iterate through the linked list of Entry's for the given bucket to find the entry with the matching key. 
+Again, a null check is used, similarly to the put method, to signifying the end of the list. \\
 
 If an entry with the matching key is found, the function returns the value of the entry. 
 Otherwise, if an entry with a matching key is not found, the function returns null.
@@ -688,8 +685,8 @@ Otherwise, if an entry with a matching key is not found, the function returns nu
 \end{algorithm}
 
 
-simirlary to the get method, the containsKey method takes a key as an argument,
-and checks for its presence within the map, instead returning a bool if it is found,
+Similarly to the get method, the containsKey method takes a key as an argument,
+and checks for its presence within the map, instead returning a boolean if it is found,
 else returning false if a null is reached, again signifying the end of the list. 
 
 
@@ -737,7 +734,7 @@ else returning false if a null is reached, again signifying the end of the list.
 
 The remove function is used to remove a key-value pair from the map, given the key.
 The method takes a key as an argument and uses it to determine the bucket in which the key-value pair is stored.
-It does this by calling the hash function to calculate the hashcode of the key. \\
+It does this by calling the hash function to calculate the hash-code of the key. \\
 
 A null check is first performed to determine whether the input argument is valid.
 If the input argument is null the function is left, and no action is performed on the object. \\
@@ -831,7 +828,7 @@ Resizing the map allows the map to function efficiently,
 even as the number of key-value pairs grows. 
 It prevents the map from becoming too full,
 which would lead to collisions.
-This would cause the put and get methods to take longer to execute as aformented.
+This would cause the put and get methods to take longer to execute as aforementioned.
 
 
 \vspace{4mm}
@@ -876,7 +873,7 @@ The hash function takes a key as an argument and calculates the integer hashcode
 The modulo operator is then used to map the hashcode to an index in the range [0, capacity), 
 where capacity is the capacity of the map (i.e., the number of buckets in the map). \\
 
-This is done by taking the absolute value of the hashcode and then calculating the remainder when it is divided by the capacity. 
+This is done by taking the absolute value of the hash-code and then calculating the remainder when it is divided by the capacity. 
 This helps to distribute the key-value pairs evenly across the buckets,
 which helps to ensure that the map remains efficient as the number of key-value pairs grows.
 
@@ -885,7 +882,7 @@ as it determines how key-value pairs are stored and retrieved in the map.
 It's important to choose a good hash function that distributes the key-value pairs evenly across the buckets
 and minimizes the number of collisions (i.e., when two or more keys hash to the same index). \\
 
-The use of hashing within the map allows us to achieve the aformentied time complexity desired for out algorithm, 
+The use of hashing within the map allows us to achieve the aforementioned time complexity desired for out algorithm, 
 saving precious time. \\
 
 
@@ -1051,7 +1048,7 @@ which upon returning true would allow us to leave the function with our complete
 
 The Dijkstra algorithm is an algorithm for finding the shortest path between two nodes (or vertices) in a graph.
 
-By Utilizing two hashmaps to represent tables, we can
+By Utilizing two hash-maps to represent tables, we can
 keep track of the current shortest distance from the start vertex to each other vertex in the graph,
 as well as the previous vertex on the shortest path from the start vertex to each vertex in the graph.
 
@@ -1066,7 +1063,7 @@ We then enter a loop, removing the top element from the priority queue
 For each vertex, we iterate over its edges, calculating the alternate distance to its neighbours 
 (current distance $+$ the weight edge weight.
 If this alternate distance is less than the current distance in the distance table for the neighbor, 
-we update the distance and previous vertex for the neighbour in the respective tables, adding the 
+we update the distance and previous vertex for the neighbour in the respective tables, adding
 the neighbour to the priority queue with the updated distance.
 
 We continue until the queue is empty,
@@ -1103,7 +1100,7 @@ to represent our graph. The first we will make use of is a linked list. \\
 In the diagram above you can see that each node
 contains a data field with the location name presumably as a string. 
 Additionally, each node also contains a reference or pointer to 
-a the next vertex in the list. The last item of the diagram represents a pointer to 
+the next vertex in the list. The last item of the diagram represents a pointer to 
 a null, representing the end of the list. \\
 
 
@@ -1111,7 +1108,7 @@ By utilizing the linked list we can begin to construct the graph data structure.
 By declaring class Vertex which, contains a data field, as well as a linked list Edges, 
 we can add references to every other vertex which said vertex leads to.
 By also providing each edge instance with an integer field, weight,
-we can therby construct a weighted graph.
+we can thereby construct a weighted graph.
 
 If we were to create a bi-directional graph, we could simply add logic which is triggered upon
 edge addition to a given vertex, which also creates a pointers in the opposite direction, 
@@ -1156,7 +1153,7 @@ from that vertex is a linked list of edges, each bearing a weight. \\
 
 \subsection{Descriptive Report, including artefacts}
 
-To begin with constructing the artefacts necassary we will first start with the linked list.
+To begin with constructing the artefacts necessary we will first start with the linked list.
 
 
 \makeatletter
@@ -1188,7 +1185,7 @@ public class Node {
 
 We start by first encapsulating a node 
 class via class composition inside of our LinkedList. We pass data as
-a generic for function composabilitys sake. Each node has a reference field 
+a generic for function compostability s sake. Each node has a reference field 
 to the next node, enabling the linking we seek, as well as a data field.
 
 \newpage
@@ -1223,7 +1220,7 @@ This function allows us to remove a node from the linked list
 if its data field returns true for a given predicate
 which is passed in as an argument to the function. \\
 
-By iterating through each node until we reach null, siginifying
+By iterating through each node until we reach null, signifying
 the end of the list, we can then call an additional 
 function, deleteValue, if our predicate is met, for each node.
 
@@ -1424,7 +1421,7 @@ public MyLinkedList<T> push(T data){
 
 Push allows us to add a new head to the existing list 
 with the passed in data argument, setting the previous head 
-to head.next to maining our linkage.
+to head.next to maintaining our linkage.
 
 \newpage
 
@@ -1507,7 +1504,7 @@ public  MyLinkedList<T> deleteAt(int index)
 \end{verbatim}
 \end{algorithm}
 The purpose of this function is to delete a node at a given position.
-First an emptyness check is performed. If the list is not empty
+First an emptiness check is performed. If the list is not empty
 we iterate through each node until we find our target node. 
 We then reassign the previous nodes next field to the targets next.
 If a deletion takes place, the size is decremented. \\
@@ -1516,7 +1513,7 @@ It would be wise to update this function to utilize the size field
 of the structure to prevent us from iterating through the list 
 should we already know that the argument index is our of bounds,
 leading to faster run time, though this is not strictly
-necassary at this early stage.
+necessary at this early stage.
 
 \newpage
 
@@ -1683,7 +1680,7 @@ The next function returns the next node in the list by
 returning the data stored in the current node and setting current to the next node in the list.
 An exception is then thrown should next be null. \\
 
-Finally a constuctor is defined to allow us to instiate an instance of the nested class for usage. \\
+Finally a constructor is defined to allow us to instantiate an instance of the nested class for usage. \\
 
 \newpage
 
@@ -1697,7 +1694,7 @@ Finally a constuctor is defined to allow us to instiate an instance of the neste
 \setcounter{algorithm}{1}
 
 This class allows us to extend the functionality of our 
-node type. As we incorperated generic types into our linked list arguments,
+node type. As we incorporated generic types into our linked list arguments,
 we can now create a LinkedList field of type Edge, (soon to discuss) for our Vertex.
 
 
@@ -1768,7 +1765,7 @@ public class Vertex {
 \vspace{4mm}
 
 The addEdge function allows us to create a new edge for a Vertex,
-by passing in a reference to the calling Vertex, aswell as a to Vertex,
+by passing in a reference to the calling Vertex, as well as a destination Vertex,
 which is used to denote the destination. Additionally we pass in the weight of the edge.
 
 
@@ -1909,8 +1906,8 @@ the class is fairly unremarkable besides
 the inclusion of two boolean fields, isGraphWeighted, and isGraphDirectional. \\
 
 These fields allow us to specify the type of our graph once upon initialization,
-and the proceding functions use those values accordingly to spare us either passing around null values,
-or writing seperate implementations of the Graph class for our use case. This extensibility may well
+and the proceeding functions use those values accordingly to spare us either passing around null values,
+or writing separate implementations of the Graph class for our use case. This extensibility may well
 prove useful down the line.
 
 
@@ -1959,8 +1956,8 @@ public Vertex addVertex(String data){
 The usage of these boolean attributes can be seen here, the most noteworthy being addEdge.
 This function handles setting weight to null for each vertex to ensure consistency.
 Additionally, if we set isGraphDirectional to false, an edge pointer will be added to the
-start Vertex to the end Vertex, as well as from the end Vertex, to the start Vertex, denoted by from and to respectivly.
-further preventing inconsistncy. Furthermore, should we need to create a graph in which only some edges are directed, 
+start Vertex to the end Vertex, as well as from the end Vertex, to the start Vertex, denoted by from and to respectively.
+Further preventing inconsistency. Furthermore, should we need to create a graph in which only some edges are directed, 
 we could overload the addEdge function to also take a boolean argument to determine whether that edge is directional.
 
 \newpage
@@ -2008,7 +2005,7 @@ We can now begin implementing our algorithms by first populating our graph. \\
 
 We will first start with depth first search, which is simple to implement but gives
 us no guarantees that any path we find will result in the lowest possible edge weight sum 
-for the completed path, as there is no heuristics involved. For simplicitys sake we will follow our ADl logic and focus on the traversal 
+for the completed path, as there is no heuristics involved. For simplicity's sake we will follow our ADl logic and focus on the traversal 
 steps, before adapting the algorithm to return the results that we desire.
 
 \newpage
@@ -2046,7 +2043,7 @@ Vertex startV, MyLinkedList<Vertex> visitedList){
 
 To begin, a linked list to store visited vertices, visitedList 
 is passed in rather than declared within the function,
-to allow us to make use of the call stack recursivly. \\
+to allow us to make use of the call stack recursively. \\
 
 We start by iterating through each edge of the starting Vertex,
 storing the vertex as thisNeighbour. 
@@ -2057,7 +2054,7 @@ We then recursively call the depthFirstTraversal function with thisNeighbour as
 the starting vertex and the updated visitedList. \\
 
 We continue exploring the graph in this manner, 
-pushing our function calls onto the cll stack passing the next neighbouring vertex.
+pushing our function calls onto the call stack passing the next neighbouring vertex.
 When the function has finished processing the current vertex and all its neighbors, 
 the function call is popped off the call stack and the program continues with the next function call on the stack
 until there are no more unvisited vertices.
@@ -2108,7 +2105,7 @@ Once the call stack is empty, the function terminates. \\
 \end{verbatim}
 \end{algorithm}
 
-By also passing a desired end Vertex, a weight integer, as well as an addtional linked list
+By also passing a desired end Vertex, a weight integer, as well as an additional linked list
 We can construct a path while accumulating our edge weight sums for said path.
 
 We start by pushing the starting Vertex onto our path,
@@ -2128,15 +2125,15 @@ when the problem does not strictly require memoization.
 This could lead to less performant code, and eventually a stack overflow. \\
 \vspace{4mm}
 
-Recursive algorithms can also be comparativly difficult to debug compared to iterative algorithms as
+Recursive algorithms can also be comparatively difficult to debug compared to iterative algorithms as
 it can be harder to fully understand the state of the program at each point of execution. \\
 \vspace{4mm}
 
 Recursive algorithms can also be slower than iterative algorithms because they involve the overhead of function calls and the maintenance of the call stack.
-Furthermore, while on some occastions a compiler can optimize a recursive algorithm, this is not always the case. 
+Furthermore, while on some occasions a compiler can optimize a recursive algorithm, this is not always the case. 
 Imperative algorithms are typically 
-easier for the compilier to optimize due the imperative nature of assembly.
-Additionlly tail call optimization is difficult for the JVM due to the necessity to always have a stack trace available. \\
+easier for the compiler to optimize due the imperative nature of assembly.
+Additionally tail call optimization is difficult for the JVM due to the necessity to always have a stack trace available. \\
 \vspace{4mm}
 
 Overall, whether recursion is an appropriate choice for implementing this algorithm will depend on 
@@ -2182,21 +2179,21 @@ the specific requirements and constraints of the problem at hand. \\
 \end{algorithm}
 \vspace{7mm}
 
-By utilizing Dijkstas's algorithm, we can ensure that the path we have found is indeed the shortest, 
+By utilizing Dijkstra's algorithm, we can ensure that the path we have found is indeed the shortest, 
 by accumulating the weights for each possible route, and returning the one which has the smallest value. \\
 
 We make use of a priority queue for this algorithm for which we have a custom priority queue object 
-which we can pass to our queue strucure, extending it's functionallity. Futher aiding function composability. \\
+which we can pass to our queue structure, extending it's functionality, further enabling function composability. \\
 \newpage
 
-It also utizile two HashMaps to represent tables used to store the distance from the start vertex 
+It also utilize two HashMaps to represent tables used to store the distance from the start vertex 
 to each vertex and the previous vertex in the shortest path from the start vertex to the current vertex. \\
 
 \vspace{8mm}
 \begin{itemize}
 \item 
 We begin by adding the start vertex and a distance of 0 to the priority queue.
-We then initialize the distances table as well asthe previous vertex table for all vertices in the graph,
+We then initialize the distances table as well as the previous vertex table for all vertices in the graph,
 setting the distance for all vertices except the start vertex to the maximum value to represent infinity,
 and the previous vertex for all vertices with null. 
 
@@ -2268,13 +2265,12 @@ to return the shortest path between any given pair of vertices.
 \vspace{6mm}
 We pass three arguments to this function,
 the starting vertex, the end vertex, as well as our graph.
-We then initialize an array of Hashmaps and call our traversal function to populate said array.
+We then initialize an array of HashMaps and call our traversal function to populate said array.
 We then name each of our array instances with respectively for the sake of code clarity,
 before printing the distance from the starting vertex to the target vertex. \\
 
 We then initialize a path to store the vertices in the shortest path.
-We then set a Vertex, v, to be equal to the target vertex.
-
+We then set a Vertex, v, to be equal to the target vertex. What is a field of a class
 before entering a while loop that continues until our end Vertex is equal to null.
 For each iteration of the loop we add the current value of v to the front of the path, 
 and set v to be equal to the previous vertex in the shortest path from the starting vertex to v, as stored in the previous table. \\
@@ -2325,7 +2321,7 @@ but we can generalize. \\
 The problem is expected to become
 incredibly difficult with large sample sized sets, and we are therefore more likely to become more accepting of
 a less than optimal solution, that is, a solution which is not the global maximum. 
-Furthermore, without using a brute force approach, 
+Furthermore, without using a brute force approach,
 (calculate the sum of every combination of numbers), which would prove prohibitively costly,
 if we do not cease iteration using via evaluation of a fitness value  derived from a fitness function,
 there is a probability that
@@ -2537,7 +2533,7 @@ end procedure
 \end{algorithm}
 
 By continually shifting the smallest value of the larger a subset, 
-a high level of fidelity can be achived. This is an alternative to 
+a high level of fidelity can be achieved. This is an alternative to 
 continually traversing the tree on every iteration to find a value closest to 
 the target. Used in conjunction with the random mutation, we can very quickly arrive at a close 
 approximation of the global maximum at very little computational cost. 
@@ -2577,14 +2573,14 @@ and subsequently plotting them on line chart for ease of comparison. \\
 
 It is imperative that we isolate the effect of the independent variable on the dependant variable 
 by holding all other variables constant. Therefore we will ensure that both variants of the program
-recieve the same inputs as arguments\\
+receive the same inputs as arguments\\
 
 
 
 \vspace{12mm}
 
 \begin{itemize}
-  \item \textbf{Independant Variable} We will contast the use and non use of random mutation
+  \item \textbf{Independent Variable} We will contrast the use and non use of random mutation
     to highlight the concept of local optima.
 \end{itemize}
 
@@ -2646,21 +2642,21 @@ recieve the same inputs as arguments\\
 
 \subsection{Discussion}
 
-It can be seem from the figure above that the incluson of random mutation within
+It can be seem from the figure above that the inclusion of random mutation within
 the algorithm consistently achieved much better results. \\
 
-Both variants of the algorithm perform fairly adequetly considering the
+Both variants of the algorithm perform fairly adequately considering the
 worst of 3\% within the target for the non-mutated variant. \\
 
-Depending on requirments, as well as the size of the dataset,
+Depending on requirements, as well as the size of the dataset,
 it could in some cases be preferable to simply aim 
 to reach a local maxima and cease execution there. 
-As our dataset is relatily small, the somewhat costly tree traversal required
-to randomly select values is arguably justafied. \\
+As our dataset is relatively small, the somewhat costly tree traversal required
+to randomly select values is arguably justified. \\
 
 Of course the brute force exhaustive search not be ideal, even with a data set of this size. 
 There $(2^n)$ different ways to place $n$ numbers into two sets.
-for our sample size of 20 it would take significantly 
+For our sample size of 20 it would take significantly 
 more than 1048576 operations to calculate every configuration,
 since each operation would involve at least one comparison and one assignment,
 and these operations would have to be repeated for each number in the set.
@@ -2730,11 +2726,11 @@ of the algorithms perform favourably when presented with a larger data set. \\
 This is most likely due to the fact that the algorithm performed a check for 
 a global maxima.
 The larger dataset results in a larger configurations of numbers,
-and thus the likelyhood of finding at any stage a value which 
-corresponds to the target is signifigantly increased. \\
+and thus the likelihood of finding at any stage a value which 
+corresponds to the target is significantly increased. \\
 
 It can be seen in the non mutated variant, that while the inability to deviate from
-a local maxima does negativly impact the resulting fitness, the previous statement is still true, 
+a local maxima does negatively impact the resulting fitness, the previous statement is still true, 
 in that the increased fidelity allows us to incidentally find a value closer to the target.
 
 
@@ -2761,7 +2757,6 @@ The program consists of 6 distinct steps, namely;
 The cyclomatic complexity of a function takes into account only the independent paths within the function itself, 
 not the paths taken through any functions that it calls. \\
 
-because it only has one independent path (the return statement). 
 For example, the cyclomatic complexity of the incrementMapVal function is 2.
 and can be expressed formally as
 $M = E - N + 2P = 2 - 1 + 2 * 1 = 2$. \\
@@ -2804,7 +2799,7 @@ including any functions that they call. \\
 \newpage
 \begin{figure}[!h]
 \vspace*{-1.5cm} 
-\caption{Mcgabes Cyclomatic Complexity Flow Chart for Hill Climb Algorithm}
+\caption{Mcgabe's Cyclomatic Complexity Flow Chart for Hill Climb Algorithm}
 \label{fig:x mainflow}
 \vspace{7mm}
 
