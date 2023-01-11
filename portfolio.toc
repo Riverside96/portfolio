@@ -1,41 +1,35 @@
-\contentsline {section}{\numberline {1}Project 1}{3}{}%
-\contentsline {subsection}{\numberline {1.1}Computational Complexity}{3}{}%
-\contentsline {subsection}{\numberline {1.2}Incorporation of Formative Feedback}{5}{}%
-\contentsline {section}{\numberline {2}Project 2}{6}{}%
-\contentsline {subsection}{\numberline {2.1}Algorithms in ADL}{6}{}%
-\contentsline {subsection}{\numberline {2.2}Data Structures}{8}{}%
-\contentsline {subsection}{\numberline {2.3}Software and its Presentation, including testing (and video link)}{15}{}%
-\contentsline {subsection}{\numberline {2.4}Descriptive Report, including artefacts}{15}{}%
-\contentsline {subsubsection}{\numberline {2.4.1}Transitioning algorithms to implementation}{15}{}%
-\contentsline {subsubsection}{\numberline {2.4.2}Problem-solving strategy}{15}{}%
-\contentsline {subsection}{\numberline {2.5}Incorporation of formative feedback}{15}{}%
-\contentsline {section}{\numberline {3}Project 3}{16}{}%
-\contentsline {subsection}{\numberline {3.1}Algorithms in ADL}{16}{}%
-\contentsline {subsection}{\numberline {3.2}Data Structures}{19}{}%
-\contentsline {subsection}{\numberline {3.3}Software and its Presentation, including testing (and video link)}{20}{}%
-\contentsline {subsection}{\numberline {3.4}Descriptive Report, including artefacts}{20}{}%
-\contentsline {subsubsection}{\numberline {3.4.1}Transitioning algorithms to implementation}{36}{}%
-\contentsline {subsubsection}{\numberline {3.4.2}Problem-solving strategy}{43}{}%
-\contentsline {subsection}{\numberline {3.5}Incorporation of formative feedback}{43}{}%
-\contentsline {section}{\numberline {4}Project 4}{44}{}%
-\contentsline {subsection}{\numberline {4.1}Introduction}{44}{}%
-\contentsline {subsubsection}{\numberline {4.1.1}Weights and Load Problem}{44}{}%
-\contentsline {subsubsection}{\numberline {4.1.2}The Problem Proposed Solution and Data Structure}{45}{}%
-\contentsline {subsection}{\numberline {4.2}Heuristic Optimisation}{46}{}%
-\contentsline {subsubsection}{\numberline {4.2.1}Designed Fitness Function}{46}{}%
-\contentsline {subsubsection}{\numberline {4.2.2}Introduction to Hill Climbing}{47}{}%
-\contentsline {subsubsection}{\numberline {4.2.3}Small Change Strategy}{48}{}%
-\contentsline {subsection}{\numberline {4.3}Incorporation of Formative Feedback}{48}{}%
-\contentsline {section}{\numberline {5}Project 5}{49}{}%
-\contentsline {subsection}{\numberline {5.1}Experiment Strategy}{49}{}%
-\contentsline {subsection}{\numberline {5.2}Experiment Results}{49}{}%
-\contentsline {subsection}{\numberline {5.3}Discussion}{49}{}%
-\contentsline {subsection}{\numberline {5.4}Largest Dataset Experiment}{49}{}%
-\contentsline {subsubsection}{\numberline {5.4.1}Dataset}{49}{}%
-\contentsline {subsubsection}{\numberline {5.4.2}Results}{49}{}%
-\contentsline {subsubsection}{\numberline {5.4.3}Discussion}{49}{}%
-\contentsline {subsection}{\numberline {5.5}Testing}{49}{}%
-\contentsline {subsection}{\numberline {5.6}Software and its Presentation, including testing (and video link)}{50}{}%
-\contentsline {subsection}{\numberline {5.7}Incorporation of Formative Feedback}{52}{}%
-\contentsline {section}{\numberline {A}Appendix A}{53}{}%
-\contentsline {section}{\numberline {B}Appendix B}{53}{}%
+\contentsline {section}{\numberline {1}Project 1}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Computational Complexity}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Incorporation of Formative Feedback}{4}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Project 2}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Algorithms in ADL}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Data Structures}{7}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Software and its Presentation, including testing}{9}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Descriptive Report, including artefacts}{9}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Incorporation of formative feedback}{13}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Project 3}{14}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Algorithms in ADL}{14}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Data Structures}{17}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Software and its Presentation, including testing}{18}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Descriptive Report, including artefacts}{18}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Transitioning algorithms to implementation}{34}{subsubsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.5}Incorporation of formative feedback}{41}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Project 4}{42}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Introduction}{42}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Weights and Load Problem}{42}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}The Problem Proposed Solution and Data Structure}{43}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Heuristic Optimisation}{44}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Designed Fitness Function}{45}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Introduction to Hill Climbing}{46}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Small Change Strategy}{46}{subsubsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.3}Incorporation of Formative Feedback}{46}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Project 5}{47}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Experiment Strategy}{47}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Experiment Results}{48}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Discussion}{48}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Largest Dataset Experiment}{49}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}Dataset}{49}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Results}{49}{subsubsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.3}Discussion}{49}{subsubsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.5}Software and its Presentation, including testing}{50}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Incorporation of Formative Feedback}{55}{subsection.5.6}%

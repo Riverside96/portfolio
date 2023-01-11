@@ -1,5 +1,6 @@
 \documentclass[a4paper]{article}
-\usepackage{graphicx} 
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
 \usepackage{amsmath}
 \usepackage{appendix}
 \usepackage{amssymb}
@@ -17,7 +18,7 @@
     {\bfseries\Large
 
     \vspace{2cm}
-        Algorithms and Data Structures\\
+        Data Structures and Algorithms\\
         Department of Computing\\
         55-508226-AF-20223\\
         \vskip2cm
@@ -34,8 +35,9 @@
 
 
 \begin{document}
+% \maketitle
 
-\titlepage
+% \titlepage
 \tableofcontents
 \newpage
 
@@ -540,8 +542,9 @@ A new array of type Entry is also declared with the specified capacity assigned 
 
 
 \pagebreak
-\subsection{Software and its Presentation, including testing (and video link)}
-
+\subsection{Software and its Presentation, including testing}
+\url{https://github.com/Riverside96/-Project_2} \\
+\url{https://youtu.be/s-Bb-ijeFlY}
 
 \subsection{Descriptive Report, including artefacts}
 
@@ -888,10 +891,6 @@ saving precious time. \\
 
 
 
-
-\subsubsection{Transitioning algorithms to implementation}
-\subsubsection{Problem-solving strategy}
-
 \subsection{Incorporation of formative feedback}
 
 
@@ -940,10 +939,30 @@ and visits its neighbors that have not yet been visited.
 If a neighbor has not been visited, it is added to the list and the function then calls itself 
 recursively passing that neighbour as an argument.
 
+The time complexity of this algorithm is $O(V+E)$ where V is the number of vertices and E is the number of edges,
+as each vertex and each edge at is visitied once at most. \\
+
+The time compliexty increases with the number of vertices and edges in a parabolic fashion.
+The major component of the time complexity stems from the for-each loop \textit{(for(Edge e : startV.getEdges()))},
+that iterates through each edge, which will be done for each vertex. \\
+
+The space complexity is $O(V+E)$, because two linked lists are utilized.
+One is used to keep track of the visited vertices, and the other to keep track of the path between the start and the end vertex, (the path).
+In the worst case, where every vertex is visited and all edges are traversed, both lists will have $V + E$ elements. \\
+
+The other for loop that iterates through the path list and prints the path also adds to the time complexity,
+but it will only be run once at the end, and is therefore not considered a high order term, regardless if this is performed in a
+post/pre order or topological fashion. \\
+
+The algorithm could alternatively be implemented recursively.
+In that case the space complexity will be $O(d)$ where $d$ is the depth of the tree.
+This approach would be faster and use less space than the iterative version,
+but be limited by the maximum stack size and therfore prone to cause a stack overflow should we 
+not allocate enough memory.
 
 
 \pagebreak
-
+\vspace*{-1.5cm}
 \begin{algorithm}
 \caption{Breadth First Traversal}\label{euclid}
 \begin{algorithmic}[1]
@@ -992,9 +1011,18 @@ This continues until all vertices in the graph have been visited. \\
 % where V is the number of vertices in the graph.
 % The space complexity is O(V) because the visitedList and the visitQueue both store at most V vertices at any given time. \\
 
-The time and space complexity of the breadthFirstTraversal algorithm are determined by the number of vertices and edges in the graph.
+Much like the depth first search, time and space complexity of the breadth first search is determined by the number of vertices and edges in the graph.
 If the graph is dense (i.e., it has a large number of edges), the time and space complexity will be higher. 
 If the graph is sparse (i.e., it has a small number of edges), the time and space complexity will be lower. \\
+
+The time complexity of the breadth first search is algorithm is $O(V + E)$, where $V$ is the number of vertices and $E$ the number of edges in the graph.
+This is because for each vertex,  each of its adjacent edges are visited before being added to the  queue of vertices to visit.
+The maximum number of vertices that will be enqueued is $V$, and for each vertex that gets dequeued,
+all of its adjacent edges will be evaluated, which is a total of $E$ operations. \\
+
+The space complexity of this algorithm is $O(V)$, where $V$ is the number of vertices.
+The maximum number of vertices that will be stored in the priority queue is $V$, which is the ampsymtotic upper bound of the space complexity. \\
+
 
 This algorithm could easily be adapted to return a complete path to a given destination
 by first passing an additional list of vertices along with a destination vertex as arguments.
@@ -1065,7 +1093,9 @@ For each vertex, we iterate over its edges, calculating the alternate distance t
 If this alternate distance is less than the current distance in the distance table for the neighbor, 
 we update the distance and previous vertex for the neighbour in the respective tables, adding
 the neighbour to the priority queue with the updated distance.
+\newpage
 
+\vspace*{-2cm}
 We continue until the queue is empty,
 at which point we return the tables as an array. 
 The final distance table will contain the shortest distances from the start vertex to all other vertices in the graph.
@@ -1073,8 +1103,23 @@ The final previous vertex table will contain the previous vertices on the shorte
 
 Using this information we can then calculate the shortest distance between any two vertices with said tables. 
 This prevents us from having re-traverse each time every time we wish to determine the shortest path to any given node 
-and allows us to further make use of the resulting data, for visualisation purposes, etc.
+and allows us to further make use of the resulting data, for visualisation purposes, etc. \\
 
+The time complexity of this algorithm is $O((V + E)logV)$,
+here $V$ is the number of vertices, and $E$ is the number of edges. \\
+
+The while loop runs $V$ times and the operations performed inside the loop is of $E+logV$. 
+The while loop runs $V$ times because the queue is polled $V$ times, 
+and each call to this method removes a vertex from the queue. \\
+
+The inner for-loop runs $E$ times in total, as it evaluates each edge for each vertex,
+and the $logV$ comes from the fact that when adding or removing elements from a PriorityQueue,
+the elements are automatically ordered, which takes $logV$ time. \\
+
+The space complexity of this algorithm is $O(V)$ where $V$ is the number of vertices.
+Two hashmaps, distTable and prevTable are utilized to store the distance and previous vertex
+for each vertex, which each occupy $O(V)$ space,
+and a priority queue which also occupies $O(V)$ space.
 
 
 \subsection{Data Structures}
@@ -1115,6 +1160,7 @@ edge addition to a given vertex, which also creates a pointers in the opposite d
 preventing user error and avoiding the accidental creation of a partially non directed graph. \\
 
 \newpage
+\vspace*{-1.5cm}
 This can be represented as following, where each node is a vertex, and each arrow leading 
 from that vertex is a linked list of edges, each bearing a weight. \\
 
@@ -1148,8 +1194,9 @@ from that vertex is a linked list of edges, each bearing a weight. \\
 \caption{Graph} \label{fig:M1}
 \end{figure}
 
-\subsection{Software and its Presentation, including testing (and video link)}
-
+\subsection{Software and its Presentation, including testing}
+\url{https://github.com/Riverside96/-Project_3}\\
+\url{https://youtu.be/J8OyIJxcmO0}
 
 \subsection{Descriptive Report, including artefacts}
 
@@ -2281,7 +2328,7 @@ Finally, we iterate through the path list, printing out the data field of each v
 
 
 \newpage
-\subsubsection{Problem-solving strategy}
+% \subsubsection{Problem-solving strategy}
 
 
 \subsection{Incorporation of formative feedback}
@@ -2737,8 +2784,11 @@ in that the increased fidelity allows us to incidentally find a value closer to 
 % \subsection{Testing}
 
 \newpage
-\subsection{Software and its Presentation, including testing (and video link)}
+\subsection{Software and its Presentation, including testing}
 \vspace{4mm}
+\url{https://github.com/Riverside96/-Project_4} \\
+\url{https://youtu.be/CVqa1Hsr4aE} \\
+ 
 The program consists of 6 distinct steps, namely;
 \vspace{4mm}
 \begin{enumerate}
@@ -2799,14 +2849,14 @@ including any functions that they call. \\
 \newpage
 \begin{figure}[!h]
 \vspace*{-1.5cm} 
-\caption{Mcgabe's Cyclomatic Complexity Flow Chart for Hill Climb Algorithm}
+\caption{Control Flow Chart for Hill Climb Algorithm}
 \label{fig:x mainflow}
 \vspace{7mm}
 
 \tikzset{decision/.style={ % requires library shapes.geometric
         draw,
         diamond,
-        aspect=3,
+        aspect=4,
         node distance= 2.5cm
     }}
 \def\minhg{10cm}
@@ -2856,6 +2906,14 @@ including any functions that they call. \\
 \end{figure}
 \newpage
 % ======================================================================================
+
+
+Calculating the cyclomatic complexity for each individual function would be laborious.
+We can get a general sense of the complexity using the figure of the previous page. 
+The control flow graph contains 17 edges, 12 nodes, and one exit point.
+We can therfore deduce that the cyclomatic complexity
+$= M = E - N + 2*P = 17 - 12 +2$. \\
+
 
 The algorithm begins with initialization; \\
 \begin{itemize}
@@ -2957,495 +3015,517 @@ We then enter a while loop, and subsequently;
    \theverbbox
 \newpage
 
+The primary concern for determining the time and space complexity of this function is the number of iterations it takes to reach the solution, 
+and the amount of memory used to store the state of the algorithm. The expected runtime is expected to be highly dependant upon the 
+input data. \\
 
+The time complexity is likely to be of the order $O(n)$ or $O(n^2)$ depending on the number of iterations,
+as each iteration of the while loop performs a number of simple operations. 
+One important factor to consider is that the loop does not exit unless a condition is met.
+the iterations have a limit of $n$ and thus time complexity would be $O(n)$. \\
+
+In terms of space complexity, the function primarily uses data structures such as
+a stack, two tree maps, and several integers and doubles to store the state of the algorithm,
+as well as some other variables used for iteration and storing results.
+The space complexity would be $O(n)$ for the stack which holds the bricks. \\
+
+If we assume the input is somewhat random it's likely that the treemap
+would be close to balanced the complexity would therfore be $O(log n)$ on average for all the operations performed on it. \\
+
+In terms of time complexity, the time taken to populate the TreeMaps 
+with the bricks would be $O(n log n)$ due to the combination of the $O(n)$ time complexity of iterating over the stack
+and the $O(log n)$ time complexity of inserting each element into the TreeMap. \\
+
+In terms of space complexity, the space used by these TreeMap objects is likely to be of order $O(n)$,
+where $n$ is the number of unique bricks in the input stack, as each key-value pair in the TreeMap takes up a given amount of memory. \\
 \begin{verbatim}
  \end{verbatim}
 
 
 
-\hspace{-0.8cm}\begin{verbbox}
-public class SmallChangeTests {
-
-    @Test
-    public void testSmallChange_closestLowerInLhs() {
-        TreeMapObj lhs = new TreeMapObj();
-        lhs.map.put(3, 1);
-        TreeMapObj rhs = new TreeMapObj();
-        int diff = 5;
-
-        int result = App.smallChange(lhs, rhs, diff);
-
-        assertEquals(3, result);
-        assertFalse(lhs.map.containsKey(3));
-        assertTrue(rhs.map.containsKey(3));
-    }
-
-    @Test
-    public void testSmallChange_noClosestLowerInLhs() {
-        TreeMapObj lhs = new TreeMapObj();
-        lhs.map.put(6, 1);
-        TreeMapObj rhs = new TreeMapObj();
-        int diff = 5;
-
-        int result = App.smallChange(lhs, rhs, diff);
-
-        assertEquals(0, result);
-        assertTrue(lhs.map.containsKey(6));
-        assertFalse(rhs.map.containsKey(6));
-    }
-
-    @Test
-    public void testSmallChange_emptyLhs() {
-        TreeMapObj lhs = new TreeMapObj();
-        TreeMapObj rhs = new TreeMapObj();
-        int diff = 5;
-
-        int result = App.smallChange(lhs, rhs, diff);
-
-        assertEquals(0, result);
-        assertTrue(lhs.map.isEmpty());
-        assertTrue(rhs.map.isEmpty());
-    }
-    \end{verbbox}
-   \theverbbox
-
-
-    \hspace{-1.7cm}\begin{verbbox}[]
-public class MutateTests {
-
-    @Test
-    void testMutate() {
-        // Create a TreeMapObj and add some key-value pairs to it
-        TreeMapObj a = new TreeMapObj();
-        a.map.put(1, 3);
-        a.map.put(2, 5);
-        a.map.put(3, 7);
-        a.map.put(4, 9);
-
-        // Create another TreeMapObj
-        TreeMapObj b = new TreeMapObj();
-
-        // Create a stack of bricks
-        Stack<Integer> bricks = new Stack<>();
-        bricks.push(1);
-        bricks.push(2);
-        bricks.push(3);
-
-        // Call the mutate function
-        App.mutate(a, b, bricks);
-
-        // Verify that the values in the two TreeMap objects are as expected
-        assertEquals(2,(int)a.map.get(1));
-        assertEquals(4, (int)a.map.get(2));
-        assertEquals(6, (int)a.map.get(3));
-        assertEquals(8, (int)a.map.get(4));
-
-        assertEquals(1, (int)b.map.get(1));
-        assertEquals(2, (int)b.map.get(2));
-        assertEquals(3, (int)b.map.get(3));
-        assertEquals(null, b.map.get(4));
-    }
-}
-    \end{verbbox}
-   \theverbbox
-
-
-
-
-
-  \hspace{-2cm}\begin{verbbox}[]
- public class DecrementMapValTests {
-  // Test that the method works as expected when the map contains the key
-  @Test
-  public void testDecrementMapVal_existingKey() {
-    TreeMapObj tm = new TreeMapObj();
-
-    tm.map.put(1, 10);
-    tm.map.put(2, 20);
-    App.decrementMapVal(tm, 1);
-
-    // Check that the value for that key has been decremented by 1
-    assertEquals(9, (int) tm.map.get(1));
-  }
-
-  // Test that the method works as expected when the map does not contain the key
-  @Test
-  public void testDecrementMapVal_newKey() {
-  TreeMapObj tm = new TreeMapObj();
-  tm.map.put(1, 10);
-  tm.map.put(2, 20);
-
-  try {
-    // Call the method with a key that is not in the map
-    App.decrementMapVal(tm, 3);
-    fail();
-  } catch (NoSuchElementException e) {
-    // If the exception is thrown, the test has passed
-  }
-}
-
-  // Test that the method throws an IllegalArgumentException when the map is null
-@Test
-public void testDecrementMapVal_nullMap() {
-  try {
-    // Call the method with a null map
-    App.decrementMapVal(null, 1);
-    fail();
-  } catch (IllegalArgumentException e) {
-    // If the exception is thrown, the test has passed
-  }
-}
-
-  // Test that the method throws a NullPointerException when the value for the key is null
-  @Test
-  public void testDecrementMapVal_nullValue() {
-    // Create a map with a key that has a null value
-    TreeMapObj tm = new TreeMapObj();
-    tm.map.put(1, null);
-
-    try {
-      // Call the method with the map and the key
-      App.decrementMapVal(tm, 1);
-      fail();
-    } catch (NullPointerException e) {
-      // If the exception is thrown, the test has passed
-    }
-  }
-}
-
-   \end{verbbox}
-   \theverbbox
-
-
-
- \hspace{-1.7cm}\begin{verbbox}[]
- public class DiffAsPosiPercTests {
-  // Test that the method works as expected when the difference is positive
-  @Test
-  public void testDiffAsPosiPerc_positive() {
-    // Call the method with a positive difference and a target value
-    double perc = App.diffAsPosiPerc(10, 100);
-
-    // Check that the method returns the correct percentage
-    assertEquals(10, perc, 0.00001);
-  }
-
-  // Test that the method works as expected when the difference is negative
-  @Test
-  public void testDiffAsPosiPerc_negative() {
-    // Call the method with a negative difference and a target value
-    double perc = App.diffAsPosiPerc(-10, 100);
-
-    // Check that the method returns the correct percentage
-    assertEquals(10, perc, 0.00001);
-  }
-
-  // Test that the method works as expected when the difference is zero
-  @Test
-  public void testDiffAsPosiPerc_zero() {
-    // Call the method with a zero difference and a target value
-    double perc = App.diffAsPosiPerc(0, 100);
-
-    // Check that the method returns 0
-    assertEquals(0, perc, 0.00001);
-  }
-
-  // Test that the method throws an IllegalArgumentException when the target value is zero
-  @Test
-  public void testDiffAsPosiPerc_zeroTarget() {
-    try {
-      // Call the method with a non-zero difference and a zero target value
-      App.diffAsPosiPerc(10, 0);
-      fail();
-    } catch (IllegalArgumentException e) {
-      // If the exception is thrown, the test has passed
-    }
-  }
-}
-   \end{verbbox}
-   \theverbbox
-\newpage
-
-
-
-
- \hspace{-2.5cm}\begin{verbbox}[]
- public class GetRandomNumberTests {
-  // Test that the method returns a value within the specified range
-  @Test
-  public void testGetRandomNumber_withinRange() {
-    int min = 1;
-    int max = 10;
-
-    for (int i = 0; i < 100; i++) {
-      // Call the method multiple times with the same range
-      int num = App.getRandomNumber(min, max);
-
-      // Check that each returned value is within the range
-      assertTrue(num >= min && num <= max);
-    }
-  }
-
-  // Test that the method returns the minimum and maximum values
-  @Test
-  public void testGetRandomNumber_minMax() {
-    int min = 1;
-    int max = 10;
-
-    for (int i = 0; i < 100; i++) {
-      // Call the method with a range that includes the minimum and maximum values
-      int num = App.getRandomNumber(min, max);
-
-      // If the returned value is either the minimum or maximum value, the test has passed
-      if (num == min || num == max) {
-        return;
-      }
-    }
-
-    // If the loop completes, none of the returned values were the minimum or maximum
-    fail();
-  }
-
-  // Test that the method throws an IllegalArgumentException 
-  //when the minimum value is greater than the maximum value
-  @Test
-  public void testGetRandomNumber_invalidRange() {
-    try {
-      // Call the method with a range where the minimum value is greater than the maximum value
-      App.getRandomNumber(10, 1);
-      fail();
-    } catch (IllegalArgumentException e) {
-      // If the exception is thrown, the test has passed
-    }
-  }
-}
-   \end{verbbox}
-   \theverbbox
-\newpage
-
-
-
-
-
-
-    \hspace{-1.7cm}\begin{verbbox}[]
- public class HillClimbTests {
-    // Test that the function returns an array of the expected length
-    @Test
-    public void testHillClimbing_arrayLength() {
-        double[] result = App.hillClimbing();
-        assertEquals(5, result.length);
-    }
-
-    // Test that the function returns an array with the expected values for the sums
-    @Test
-    public void testHillClimbing_sums() {
-        double[] result = App.hillClimbing();
-        int sum1 = (int) result[0];
-        int sum2 = (int) result[1];
-        assertTrue(sum1 + sum2 == (int) result[2]);
-    }
-
-    // Test that the function returns an array with the expected number of iterations
-    @Test
-    public void testHillClimbing_iterations() {
-        double[] result = App.hillClimbing();
-        assertTrue(result[3] > 0);
-    }
-
-    // Test that the function returns an array with the expected best fitness value
-    @Test
-    public void testHillClimbing_bestFitness() {
-        double[] result = App.hillClimbing();
-        assertTrue(result[4] >= 0);
-    }
-   \end{verbbox}
-   \theverbbox
-
-
-
-
-    \hspace{-1.7cm}\begin{verbbox}[]
- public class IncrementMapValTests {
-  // Test that the method works as expected when the map contains the key
-  @Test
-  public void testIncrementMapVal_existingKey() {
-    // TreeMap<Integer, Integer> map = new TreeMap<>();
-    TreeMapObj tm = new TreeMapObj();
-    tm.map.put(1, 10);
-    tm.map.put(2, 20);
-
-   // Call the method with a key that is in the map
-    App.incrementMapVal(tm, 1);
-   // Check that the value for that key has been incremented by 1
-    assertEquals(11, (int) tm.map.get(1));
-  }
-
-  // Test that the method works as expected when the map does not contain the key
-  @Test
-  public void testIncrementMapVal_newKey() {
-  // Create a map with some key-value pairs
-    // Map<Integer, Integer> map = new HashMap<>();
-    TreeMapObj tm = new TreeMapObj();
-    tm.map.put(1, 10);
-    tm.map.put(2, 20);
-    // Call the method with a key that is not in the map
-    App.incrementMapVal(tm, 3);
-    // Check that the value for that key has been set to 1
-    assertEquals(1, (int) tm.map.get(3));
-  }
-
-    // Test that the method throws a NullPointerException when the map is null
-  @Test
-  public void testIncrementMapVal_nullMap() {
-    try {
-    // Call the method with a null map
-      App.incrementMapVal(null, 1);
-      fail();
-    } catch (NullPointerException e) {
-    // If the exception is thrown, the test has passed
-    }
-  }
-
-    // Test that the method throws a NullPointerException when the value for the key is null
-  @Test
-  public void testIncrementMapVal_nullValue() {
-    // Map<Integer, Integer> map = new HashMap<>();
-    TreeMapObj tm = new TreeMapObj();
-    tm.map.put(1, null);
-
-    // Call the method with the map and the key
-    try {
-      App.incrementMapVal(tm, 1);
-      fail();
-    } catch (NullPointerException e) {
-    // If the exception is thrown, the test has passed
-    }
-  }
-}
-   \end{verbbox}
-   \theverbbox
-
-
-
-
-
-
-
-
-
-
-
-
-
-    \hspace{-1.7cm}\begin{verbbox}[]
-
-public class IsEvenTests {
-  // Test that the method returns true for even numbers
-  @Test
-  public void testIsEven_even() {
-    // Call the method with a few even numbers
-    assertTrue(App.isEven(2));
-    assertTrue(App.isEven(4));
-    assertTrue(App.isEven(6));
-  }
-
-  // Test that the method returns false for odd numbers
-  @Test
-  public void testIsEven_odd() {
-    // Call the method with a few odd numbers
-    assertFalse(App.isEven(1));
-    assertFalse(App.isEven(3));
-    assertFalse(App.isEven(5));
-  }
-
-  // Test that the method returns true for the minimum and maximum values of the int data type
-  @Test
-  public void testIsEven_minMax() {
-    // Call the method with the minimum and maximum values of the int data type
-    assertTrue(App.isEven(Integer.MIN_VALUE));
-    assertFalse(App.isEven(Integer.MAX_VALUE));
-  }
-
-  // Test that the method returns true for zero
-  @Test
-  public void testIsEven_zero() {
-    // Call the method with zero
-    assertTrue(App.isEven(0));
-  }
-}
-    \end{verbbox}
-   \theverbbox
-
-    \hspace{-1.7cm}\begin{verbbox}[]
-public class SmallestDiffTests {
-  @Test
-  public void Test_Cases() {
-      // Test for the case where x is smaller than y and target is between x and y
-      assertEquals(App.smallestDiff(1, 5, 3), 2);
-      // Test for the case where x is smaller than y and target is greater than y
-      assertEquals(App.smallestDiff(1, 5, 7), 2);
-      // Test for the case where x is greater than y and target is between y and x
-      assertEquals(App.smallestDiff(5, 1, 3), 2);
-      // Test for the case where x is greater than y and target is less than y
-      assertEquals(App.smallestDiff(5, 1, 0), 1);
-      // Test for the case where x and y are equal
-      assertEquals(App.smallestDiff(5, 5, 3), 2);
-  }
-}
-    \end{verbbox}
-   \theverbbox
-
-
-
-
-    \hspace{-1.7cm}\begin{verbbox}[]
-public class PrintMapKVPTests {
-  @Test
-  public void testPrintMapKVP() {
-    Map<Integer, Integer> map = new HashMap<>();
-    map.put(1, 10);
-    map.put(2, 20);
-
-    // Use a ByteArrayOutputStream to capture the output of the method
-    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outContent));
-
-    // Call the method with the map
-    App.printMapKVP(map);
-
-    // Use assertions to check that the method printed the expected key-value pairs
-    assertEquals("1=10\n2=20\n", outContent.toString());
-  }
-
-  @Test
-  public void testPrintMapKVP_emptyMap() {
-    Map<Integer, Integer> map = new HashMap<>();
-
-    // Use a ByteArrayOutputStream to capture the output of the method
-    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outContent));
-
-    // Call the method with the empty map
-    App.printMapKVP(map);
-
-    // Check that the method did not print anything
-    assertEquals("", outContent.toString());
-  }
-
-  @Test
-  public void testPrintMapKVP_nullMap() {
-    try {
-      // Call the method with a null map
-      App.printMapKVP(null);
-      fail();
-    } catch (NullPointerException e) {
-      // If the exception is thrown, the test has passed
-    }
-  }
-}
-    \end{verbbox}
-   \theverbbox
+% \hspace{-0.8cm}\begin{verbbox}
+% public class SmallChangeTests {
+
+%     @Test
+%     public void testSmallChange_closestLowerInLhs() {
+%         TreeMapObj lhs = new TreeMapObj();
+%         lhs.map.put(3, 1);
+%         TreeMapObj rhs = new TreeMapObj();
+%         int diff = 5;
+
+%         int result = App.smallChange(lhs, rhs, diff);
+
+%         assertEquals(3, result);
+%         assertFalse(lhs.map.containsKey(3));
+%         assertTrue(rhs.map.containsKey(3));
+%     }
+
+%     @Test
+%     public void testSmallChange_noClosestLowerInLhs() {
+%         TreeMapObj lhs = new TreeMapObj();
+%         lhs.map.put(6, 1);
+%         TreeMapObj rhs = new TreeMapObj();
+%         int diff = 5;
+
+%         int result = App.smallChange(lhs, rhs, diff);
+
+%         assertEquals(0, result);
+%         assertTrue(lhs.map.containsKey(6));
+%         assertFalse(rhs.map.containsKey(6));
+%     }
+
+%     @Test
+%     public void testSmallChange_emptyLhs() {
+%         TreeMapObj lhs = new TreeMapObj();
+%         TreeMapObj rhs = new TreeMapObj();
+%         int diff = 5;
+
+%         int result = App.smallChange(lhs, rhs, diff);
+
+%         assertEquals(0, result);
+%         assertTrue(lhs.map.isEmpty());
+%         assertTrue(rhs.map.isEmpty());
+%     }
+%     \end{verbbox}
+%    \theverbbox
+
+
+%     \hspace{-1.7cm}\begin{verbbox}[]
+% public class MutateTests {
+
+%     @Test
+%     void testMutate() {
+%         // Create a TreeMapObj and add some key-value pairs to it
+%         TreeMapObj a = new TreeMapObj();
+%         a.map.put(1, 3);
+%         a.map.put(2, 5);
+%         a.map.put(3, 7);
+%         a.map.put(4, 9);
+
+%         // Create another TreeMapObj
+%         TreeMapObj b = new TreeMapObj();
+
+%         // Create a stack of bricks
+%         Stack<Integer> bricks = new Stack<>();
+%         bricks.push(1);
+%         bricks.push(2);
+%         bricks.push(3);
+
+%         // Call the mutate function
+%         App.mutate(a, b, bricks);
+
+%         // Verify that the values in the two TreeMap objects are as expected
+%         assertEquals(2,(int)a.map.get(1));
+%         assertEquals(4, (int)a.map.get(2));
+%         assertEquals(6, (int)a.map.get(3));
+%         assertEquals(8, (int)a.map.get(4));
+
+%         assertEquals(1, (int)b.map.get(1));
+%         assertEquals(2, (int)b.map.get(2));
+%         assertEquals(3, (int)b.map.get(3));
+%         assertEquals(null, b.map.get(4));
+%     }
+% }
+%     \end{verbbox}
+%    \theverbbox
+
+
+
+
+
+%   \hspace{-2cm}\begin{verbbox}[]
+%  public class DecrementMapValTests {
+%   // Test that the method works as expected when the map contains the key
+%   @Test
+%   public void testDecrementMapVal_existingKey() {
+%     TreeMapObj tm = new TreeMapObj();
+
+%     tm.map.put(1, 10);
+%     tm.map.put(2, 20);
+%     App.decrementMapVal(tm, 1);
+
+%     // Check that the value for that key has been decremented by 1
+%     assertEquals(9, (int) tm.map.get(1));
+%   }
+
+%   // Test that the method works as expected when the map does not contain the key
+%   @Test
+%   public void testDecrementMapVal_newKey() {
+%   TreeMapObj tm = new TreeMapObj();
+%   tm.map.put(1, 10);
+%   tm.map.put(2, 20);
+
+%   try {
+%     // Call the method with a key that is not in the map
+%     App.decrementMapVal(tm, 3);
+%     fail();
+%   } catch (NoSuchElementException e) {
+%     // If the exception is thrown, the test has passed
+%   }
+% }
+
+%   // Test that the method throws an IllegalArgumentException when the map is null
+% @Test
+% public void testDecrementMapVal_nullMap() {
+%   try {
+%     // Call the method with a null map
+%     App.decrementMapVal(null, 1);
+%     fail();
+%   } catch (IllegalArgumentException e) {
+%     // If the exception is thrown, the test has passed
+%   }
+% }
+
+%   // Test that the method throws a NullPointerException when the value for the key is null
+%   @Test
+%   public void testDecrementMapVal_nullValue() {
+%     // Create a map with a key that has a null value
+%     TreeMapObj tm = new TreeMapObj();
+%     tm.map.put(1, null);
+
+%     try {
+%       // Call the method with the map and the key
+%       App.decrementMapVal(tm, 1);
+%       fail();
+%     } catch (NullPointerException e) {
+%       // If the exception is thrown, the test has passed
+%     }
+%   }
+% }
+
+%    \end{verbbox}
+%    \theverbbox
+
+
+
+%  \hspace{-1.7cm}\begin{verbbox}[]
+%  public class DiffAsPosiPercTests {
+%   // Test that the method works as expected when the difference is positive
+%   @Test
+%   public void testDiffAsPosiPerc_positive() {
+%     // Call the method with a positive difference and a target value
+%     double perc = App.diffAsPosiPerc(10, 100);
+
+%     // Check that the method returns the correct percentage
+%     assertEquals(10, perc, 0.00001);
+%   }
+
+%   // Test that the method works as expected when the difference is negative
+%   @Test
+%   public void testDiffAsPosiPerc_negative() {
+%     // Call the method with a negative difference and a target value
+%     double perc = App.diffAsPosiPerc(-10, 100);
+
+%     // Check that the method returns the correct percentage
+%     assertEquals(10, perc, 0.00001);
+%   }
+
+%   // Test that the method works as expected when the difference is zero
+%   @Test
+%   public void testDiffAsPosiPerc_zero() {
+%     // Call the method with a zero difference and a target value
+%     double perc = App.diffAsPosiPerc(0, 100);
+
+%     // Check that the method returns 0
+%     assertEquals(0, perc, 0.00001);
+%   }
+
+%   // Test that the method throws an IllegalArgumentException when the target value is zero
+%   @Test
+%   public void testDiffAsPosiPerc_zeroTarget() {
+%     try {
+%       // Call the method with a non-zero difference and a zero target value
+%       App.diffAsPosiPerc(10, 0);
+%       fail();
+%     } catch (IllegalArgumentException e) {
+%       // If the exception is thrown, the test has passed
+%     }
+%   }
+% }
+%    \end{verbbox}
+%    \theverbbox
+% \newpage
+
+
+
+
+%  \hspace{-2.5cm}\begin{verbbox}[]
+%  public class GetRandomNumberTests {
+%   // Test that the method returns a value within the specified range
+%   @Test
+%   public void testGetRandomNumber_withinRange() {
+%     int min = 1;
+%     int max = 10;
+
+%     for (int i = 0; i < 100; i++) {
+%       // Call the method multiple times with the same range
+%       int num = App.getRandomNumber(min, max);
+
+%       // Check that each returned value is within the range
+%       assertTrue(num >= min && num <= max);
+%     }
+%   }
+
+%   // Test that the method returns the minimum and maximum values
+%   @Test
+%   public void testGetRandomNumber_minMax() {
+%     int min = 1;
+%     int max = 10;
+
+%     for (int i = 0; i < 100; i++) {
+%       // Call the method with a range that includes the minimum and maximum values
+%       int num = App.getRandomNumber(min, max);
+
+%       // If the returned value is either the minimum or maximum value, the test has passed
+%       if (num == min || num == max) {
+%         return;
+%       }
+%     }
+
+%     // If the loop completes, none of the returned values were the minimum or maximum
+%     fail();
+%   }
+
+%   // Test that the method throws an IllegalArgumentException 
+%   //when the minimum value is greater than the maximum value
+%   @Test
+%   public void testGetRandomNumber_invalidRange() {
+%     try {
+%       // Call the method with a range where the minimum value is greater than the maximum value
+%       App.getRandomNumber(10, 1);
+%       fail();
+%     } catch (IllegalArgumentException e) {
+%       // If the exception is thrown, the test has passed
+%     }
+%   }
+% }
+%    \end{verbbox}
+%    \theverbbox
+% \newpage
+
+
+
+
+
+
+%     \hspace{-1.7cm}\begin{verbbox}[]
+%  public class HillClimbTests {
+%     // Test that the function returns an array of the expected length
+%     @Test
+%     public void testHillClimbing_arrayLength() {
+%         double[] result = App.hillClimbing();
+%         assertEquals(5, result.length);
+%     }
+
+%     // Test that the function returns an array with the expected values for the sums
+%     @Test
+%     public void testHillClimbing_sums() {
+%         double[] result = App.hillClimbing();
+%         int sum1 = (int) result[0];
+%         int sum2 = (int) result[1];
+%         assertTrue(sum1 + sum2 == (int) result[2]);
+%     }
+
+%     // Test that the function returns an array with the expected number of iterations
+%     @Test
+%     public void testHillClimbing_iterations() {
+%         double[] result = App.hillClimbing();
+%         assertTrue(result[3] > 0);
+%     }
+
+%     // Test that the function returns an array with the expected best fitness value
+%     @Test
+%     public void testHillClimbing_bestFitness() {
+%         double[] result = App.hillClimbing();
+%         assertTrue(result[4] >= 0);
+%     }
+%    \end{verbbox}
+%    \theverbbox
+
+
+
+
+%     \hspace{-1.7cm}\begin{verbbox}[]
+%  public class IncrementMapValTests {
+%   // Test that the method works as expected when the map contains the key
+%   @Test
+%   public void testIncrementMapVal_existingKey() {
+%     // TreeMap<Integer, Integer> map = new TreeMap<>();
+%     TreeMapObj tm = new TreeMapObj();
+%     tm.map.put(1, 10);
+%     tm.map.put(2, 20);
+
+%    // Call the method with a key that is in the map
+%     App.incrementMapVal(tm, 1);
+%    // Check that the value for that key has been incremented by 1
+%     assertEquals(11, (int) tm.map.get(1));
+%   }
+
+%   // Test that the method works as expected when the map does not contain the key
+%   @Test
+%   public void testIncrementMapVal_newKey() {
+%   // Create a map with some key-value pairs
+%     // Map<Integer, Integer> map = new HashMap<>();
+%     TreeMapObj tm = new TreeMapObj();
+%     tm.map.put(1, 10);
+%     tm.map.put(2, 20);
+%     // Call the method with a key that is not in the map
+%     App.incrementMapVal(tm, 3);
+%     // Check that the value for that key has been set to 1
+%     assertEquals(1, (int) tm.map.get(3));
+%   }
+
+%     // Test that the method throws a NullPointerException when the map is null
+%   @Test
+%   public void testIncrementMapVal_nullMap() {
+%     try {
+%     // Call the method with a null map
+%       App.incrementMapVal(null, 1);
+%       fail();
+%     } catch (NullPointerException e) {
+%     // If the exception is thrown, the test has passed
+%     }
+%   }
+
+%     // Test that the method throws a NullPointerException when the value for the key is null
+%   @Test
+%   public void testIncrementMapVal_nullValue() {
+%     // Map<Integer, Integer> map = new HashMap<>();
+%     TreeMapObj tm = new TreeMapObj();
+%     tm.map.put(1, null);
+
+%     // Call the method with the map and the key
+%     try {
+%       App.incrementMapVal(tm, 1);
+%       fail();
+%     } catch (NullPointerException e) {
+%     // If the exception is thrown, the test has passed
+%     }
+%   }
+% }
+%    \end{verbbox}
+%    \theverbbox
+
+
+
+
+
+
+
+
+
+
+
+
+
+%     \hspace{-1.7cm}\begin{verbbox}[]
+
+% public class IsEvenTests {
+%   // Test that the method returns true for even numbers
+%   @Test
+%   public void testIsEven_even() {
+%     // Call the method with a few even numbers
+%     assertTrue(App.isEven(2));
+%     assertTrue(App.isEven(4));
+%     assertTrue(App.isEven(6));
+%   }
+
+%   // Test that the method returns false for odd numbers
+%   @Test
+%   public void testIsEven_odd() {
+%     // Call the method with a few odd numbers
+%     assertFalse(App.isEven(1));
+%     assertFalse(App.isEven(3));
+%     assertFalse(App.isEven(5));
+%   }
+
+%   // Test that the method returns true for the minimum and maximum values of the int data type
+%   @Test
+%   public void testIsEven_minMax() {
+%     // Call the method with the minimum and maximum values of the int data type
+%     assertTrue(App.isEven(Integer.MIN_VALUE));
+%     assertFalse(App.isEven(Integer.MAX_VALUE));
+%   }
+
+%   // Test that the method returns true for zero
+%   @Test
+%   public void testIsEven_zero() {
+%     // Call the method with zero
+%     assertTrue(App.isEven(0));
+%   }
+% }
+%     \end{verbbox}
+%    \theverbbox
+
+%     \hspace{-1.7cm}\begin{verbbox}[]
+% public class SmallestDiffTests {
+%   @Test
+%   public void Test_Cases() {
+%       // Test for the case where x is smaller than y and target is between x and y
+%       assertEquals(App.smallestDiff(1, 5, 3), 2);
+%       // Test for the case where x is smaller than y and target is greater than y
+%       assertEquals(App.smallestDiff(1, 5, 7), 2);
+%       // Test for the case where x is greater than y and target is between y and x
+%       assertEquals(App.smallestDiff(5, 1, 3), 2);
+%       // Test for the case where x is greater than y and target is less than y
+%       assertEquals(App.smallestDiff(5, 1, 0), 1);
+%       // Test for the case where x and y are equal
+%       assertEquals(App.smallestDiff(5, 5, 3), 2);
+%   }
+% }
+%     \end{verbbox}
+%    \theverbbox
+
+
+
+
+%     \hspace{-1.7cm}\begin{verbbox}[]
+% public class PrintMapKVPTests {
+%   @Test
+%   public void testPrintMapKVP() {
+%     Map<Integer, Integer> map = new HashMap<>();
+%     map.put(1, 10);
+%     map.put(2, 20);
+
+%     // Use a ByteArrayOutputStream to capture the output of the method
+%     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+%     System.setOut(new PrintStream(outContent));
+
+%     // Call the method with the map
+%     App.printMapKVP(map);
+
+%     // Use assertions to check that the method printed the expected key-value pairs
+%     assertEquals("1=10\n2=20\n", outContent.toString());
+%   }
+
+%   @Test
+%   public void testPrintMapKVP_emptyMap() {
+%     Map<Integer, Integer> map = new HashMap<>();
+
+%     // Use a ByteArrayOutputStream to capture the output of the method
+%     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+%     System.setOut(new PrintStream(outContent));
+
+%     // Call the method with the empty map
+%     App.printMapKVP(map);
+
+%     // Check that the method did not print anything
+%     assertEquals("", outContent.toString());
+%   }
+
+%   @Test
+%   public void testPrintMapKVP_nullMap() {
+%     try {
+%       // Call the method with a null map
+%       App.printMapKVP(null);
+%       fail();
+%     } catch (NullPointerException e) {
+%       // If the exception is thrown, the test has passed
+%     }
+%   }
+% }
+%     \end{verbbox}
+%    \theverbbox
 
 
 
